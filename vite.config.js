@@ -11,4 +11,7 @@ export default defineConfig({
 			'~': path.resolve(__dirname, 'node_modules/'),
 		},
 	},
+	server: {
+		port: 5174,
+	},
 })

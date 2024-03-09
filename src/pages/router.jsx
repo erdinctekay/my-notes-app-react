@@ -16,8 +16,6 @@ const Router = () => {
 		.filter(({ authRequired, nonAuthRequired }) => !authRequired && !nonAuthRequired)
 		.map(({ path, title, element }) => <Route key={title} path={`/${path}`} element={element} />)
 
-	console.log(nonAuthRequiredRoutes)
-
 	const pageRoutes = [
 		<Route key="nonAuthRequired" element={<NonAuthRequired />}>
 			{nonAuthRequiredRoutes}
@@ -27,8 +25,6 @@ const Router = () => {
 		</Route>,
 		...otherRoutes,
 	]
-
-	console.log(pageRoutes)
 
 	return (
 		<Routes>
