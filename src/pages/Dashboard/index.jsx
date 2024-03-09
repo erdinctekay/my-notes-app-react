@@ -1,8 +1,12 @@
+import NoteList from '@/components/NoteList'
+import NoteContent from '@/components/NoteContent'
+
 const Dashboard = () => {
 	return (
-		<section>
-			<h1 style={{ textAlign: 'center' }}>Dashboard</h1>
-		</section>
+		<>
+			<NoteList />
+			<NoteContent />
+		</>
 	)
 }
 
