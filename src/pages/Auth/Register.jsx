@@ -24,6 +24,7 @@ const Register = () => {
 	})
 	const [confirmPassword, setConfirmPassword] = useState('')
 	const [error, setError] = useState(null)
+	const [loading, setLoading] = useState(false)
 
 	const checkIsPasswordOK = (password) => {
 		setPassword(password)
@@ -38,6 +39,8 @@ const Register = () => {
 
 	const handleRegister = async () => {
 		try {
+			setLoading(true)
+
 			if (password.length > 0) {
 				if (Object.values(isPasswordOK).some((value) => value === false))
 					return setError('Error (auth/password-conditions-not-met).')
@@ -48,9 +51,11 @@ const Register = () => {
 			const res = await createUserWithEmailAndPassword(auth, email, password)
 			const user = JSON.parse(JSON.stringify(res.user))
 			dispatch(login(user))
+			setLoading(false)
 			navigate('/dashboard')
 		} catch (error) {
 			setError(error.message.split('Firebase: ')[1])
+			setLoading(false)
 		}
 	}
 
@@ -101,6 +106,7 @@ const Register = () => {
 						placeholder="johndoe@email.com"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						disabled={loading}
 					/>
 				</FormControl>
 				<FormControl>
@@ -111,6 +117,7 @@ const Register = () => {
 						placeholder="password"
 						value={password}
 						onChange={(e) => checkIsPasswordOK(e.target.value)}
+						disabled={loading}
 					/>
 				</FormControl>
 				<div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -127,11 +134,13 @@ const Register = () => {
 						placeholder="password"
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
+						disabled={loading}
 					/>
 				</FormControl>
 				<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
 					<Switch
 						onChange={(e) => setShowPassword(e.target.checked)}
+						disabled={loading}
 						startDecorator={
 							<Typography component="label" fontSize="xs">
 								See password
@@ -140,7 +149,7 @@ const Register = () => {
 					/>
 				</div>
 
-				<Button sx={{ mt: 1 }} onClick={handleRegister}>
+				<Button sx={{ mt: 1 }} onClick={handleRegister} disabled={loading} loading={loading}>
 					Register
 				</Button>
 				<Typography endDecorator={<NavLink to="/auth/login">Login</NavLink>} fontSize="sm" sx={{ alignSelf: 'center' }}>

@@ -14,14 +14,18 @@ const Logout = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const [error, setError] = useState(null)
+	const [loading, setLoading] = useState(false)
 
 	const handleLogout = async () => {
 		try {
+			setLoading(true)
 			await signOut(auth)
 			dispatch(logout())
+			setLoading(false)
 			navigate('/auth/login')
 		} catch (error) {
 			setError(error.message.split('Firebase: ')[1])
+			setLoading(false)
 		}
 	}
 
@@ -76,7 +80,7 @@ const Logout = () => {
 					>
 						Return
 					</Button>
-					<Button sx={{ mt: 1, width: '50%' }} onClick={handleLogout}>
+					<Button sx={{ mt: 1, width: '50%' }} onClick={handleLogout} disabled={loading} loading={loading}>
 						Logout
 					</Button>
 				</div>

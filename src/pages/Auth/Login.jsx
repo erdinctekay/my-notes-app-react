@@ -17,15 +17,19 @@ const Login = () => {
 	const [password, setPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 	const [error, setError] = useState(null)
+	const [loading, setLoading] = useState(false)
 
 	const handleLogin = async () => {
 		try {
+			setLoading(true)
 			const res = await signInWithEmailAndPassword(auth, email, password)
 			const user = JSON.parse(JSON.stringify(res.user))
 			dispatch(login(user))
+			setLoading(false)
 			navigate('/dashboard')
 		} catch (error) {
 			setError(error.message.split('Firebase: ')[1])
+			setLoading(false)
 		}
 	}
 
@@ -77,6 +81,7 @@ const Login = () => {
 						placeholder="johndoe@email.com"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						disabled={loading}
 					/>
 				</FormControl>
 				<FormControl>
@@ -87,11 +92,13 @@ const Login = () => {
 						placeholder="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						disabled={loading}
 					/>
 				</FormControl>
 				<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
 					<Switch
 						onChange={(e) => setShowPassword(e.target.checked)}
+						disabled={loading}
 						startDecorator={
 							<Typography component="label" fontSize="xs">
 								See password
@@ -100,7 +107,7 @@ const Login = () => {
 					/>
 				</div>
 
-				<Button sx={{ mt: 1 }} onClick={handleLogin}>
+				<Button sx={{ mt: 1 }} onClick={handleLogin} disabled={loading} loading={loading}>
 					Login
 				</Button>
 				<Typography
