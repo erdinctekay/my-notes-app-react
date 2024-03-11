@@ -12,7 +12,7 @@ const NonAuthRequired = () => {
 		}
 	}, [account, navigate])
 
-	return <Outlet />
+	if (!account) return <Outlet />
 }
 
 export default NonAuthRequired

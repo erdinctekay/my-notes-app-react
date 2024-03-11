@@ -8,11 +8,11 @@ const AuthRequired = () => {
 
 	useEffect(() => {
 		if (!account) {
-			return navigate('/auth/login')
+			navigate('/auth/login')
 		}
 	}, [account, navigate])
 
-	return <Outlet />
+	if (account) return <Outlet />
 }
 
 export default AuthRequired
