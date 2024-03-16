@@ -8,7 +8,7 @@ import { auth } from '@/services/firebase/index.js'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { useDispatch } from 'react-redux'
-import { login } from '../../features/account/accountSlice'
+import { login } from '@/features/account/accountSlice'
 
 const Register = () => {
 	const dispatch = useDispatch()

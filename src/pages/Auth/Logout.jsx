@@ -8,7 +8,7 @@ import { auth } from '@/services/firebase/index.js'
 import { signOut } from 'firebase/auth'
 
 import { useDispatch } from 'react-redux'
-import { logout } from '../../features/account/accountSlice'
+import { logout } from '@/features/account/accountSlice'
 
 const Logout = () => {
 	const dispatch = useDispatch()
