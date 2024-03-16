@@ -59,8 +59,8 @@ const Register = () => {
 		}
 	}
 
-	const handleSnackbarClose = () => {
-		setError(null)
+	const handleSnackbarClose = (event, reason) => {
+		if (reason !== 'clickaway') setError(null)
 	}
 
 	return (
