@@ -1,40 +1,6 @@
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { useColorScheme } from '@mui/joy/styles'
-import { Tooltip, IconButton } from '@mui/joy'
-import { DarkModeRounded as DarkModeRoundedIcon, LightModeRounded as LightModeRoundedIcon } from '@mui/icons-material'
-
-function ColorSchemeToggle() {
-	const { mode, setMode } = useColorScheme()
-	const [mounted, setMounted] = useState(false)
-	useEffect(() => {
-		setMounted(true)
-	}, [])
-	if (!mounted) {
-		return <IconButton size="sm" variant="outlined" color="primary" />
-	}
-	return (
-		<Tooltip title="Change theme" variant="outlined">
-			<IconButton
-				id="toggle-mode"
-				size="sm"
-				variant="plain"
-				color="neutral"
-				sx={{ alignSelf: 'center' }}
-				onClick={() => {
-					if (mode === 'light') {
-						setMode('dark')
-					} else {
-						setMode('light')
-					}
-				}}
-			>
-				{mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
-			</IconButton>
-		</Tooltip>
-	)
-}
+import ColorSchemeToggler from './ColorSchemeToggler'
 
 const Header = () => {
 	const account = useSelector((state) => state.account.account)
@@ -60,7 +26,7 @@ const Header = () => {
 						<small>Not logged in</small>
 					)}
 					<span>&nbsp;|&nbsp;</span>
-					<ColorSchemeToggle />
+					<ColorSchemeToggler />
 				</div>
 			</section>
 		</header>
