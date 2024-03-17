@@ -25,7 +25,7 @@ export const notesApi = createApi({
 				return currentArg !== previousArg
 			},
 			providesTags: (res) =>
-				res.items
+				res?.items?.length > 0
 					? [
 							...res.items.map(({ id }) => ({
 								type: 'Notes',
