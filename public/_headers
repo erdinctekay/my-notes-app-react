@@ -1,0 +1,10 @@
+/*
+Cache-Control: max-age=31536000
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Referrer-Policy: strict-origin-when-cross-origin
+Access-Control-Allow-Origin: https://erdinc-notes-app-react.netlify.app
+
+/images/*
+Cache-Control: max-age=2592000
