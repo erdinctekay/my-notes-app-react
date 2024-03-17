@@ -168,7 +168,7 @@ html[data-joy-color-scheme='light'] .no-selected-note-container {
 }
 
 .ql-snow .ql-picker-options {
-	background-color: var(--ListItem-stickyBackground);
+	background-color: var(--joy-palette-background-body);
 	color: var(--joy-palette-text-secondary, var(--joy-palette-neutral-700, #32383e));
 	border-radius: 5px;
 	padding: 8px 12px;
