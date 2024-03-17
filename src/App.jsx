@@ -27,7 +27,7 @@ function App() {
 			<CssVarsProvider>
 				<CssBaseline />
 				<div
-					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}
+					style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100dvh', width: '100vw' }}
 				>
 					<CircularProgress color="primary" determinate={false} size="lg" value={25} variant="soft" />
 				</div>
