@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 
-import { Sheet, Typography, FormControl, FormLabel, Input, Button, Snackbar, Switch } from '@mui/joy'
+import { Sheet, Typography, FormControl, FormLabel, Input, Button, Snackbar, Switch, Divider } from '@mui/joy'
 import { Report as ReportIcon } from '@mui/icons-material'
 
 import { auth } from '@/services/firebase/index.js'
@@ -19,10 +19,16 @@ const Login = () => {
 	const [error, setError] = useState(null)
 	const [loading, setLoading] = useState(false)
 
-	const handleLogin = async () => {
+	const demoLogin = async () => {
+		setLoading(true)
+		const [demoEmail, demoPassword] = import.meta.env.VITE_NOTES_DEMO_ACCOUNT.split(' ')
+		handleLogin(demoEmail, demoPassword)
+	}
+
+	const handleLogin = async (account_mail = email, account_pw = password) => {
 		try {
 			setLoading(true)
-			const res = await signInWithEmailAndPassword(auth, email, password)
+			const res = await signInWithEmailAndPassword(auth, account_mail, account_pw)
 			const user = JSON.parse(JSON.stringify(res.user))
 			dispatch(login(user))
 			setLoading(false)
@@ -107,7 +113,7 @@ const Login = () => {
 					/>
 				</div>
 
-				<Button sx={{ mt: 1 }} onClick={handleLogin} disabled={loading} loading={loading}>
+				<Button sx={{ mt: 1 }} onClick={() => handleLogin()} disabled={loading} loading={loading}>
 					Login
 				</Button>
 				<Typography
@@ -117,6 +123,10 @@ const Login = () => {
 				>
 					Don&apos;t have an account?
 				</Typography>
+				<Divider sx={{ my: 0 }} />
+				<Button color="primary" variant="soft" onClick={demoLogin} disabled={loading}>
+					Login with DEMO account
+				</Button>
 			</Sheet>
 		</section>
 	)
