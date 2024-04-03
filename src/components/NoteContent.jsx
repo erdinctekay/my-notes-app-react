@@ -122,6 +122,7 @@ export default function NoteContent() {
 							flexWrap: 'wrap',
 							py: '11px',
 							px: '2rem',
+							height: '64px',
 						}}
 					>
 						<Box
