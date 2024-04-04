@@ -176,20 +176,19 @@ const NoteList = () => {
 				}}
 			>
 				<div className="scrollable scroll-y" style={{ height: 'calc(100dvh - 60px - var(--list-actions-height))' }}>
-					{listLoading ||
-						(listFetching && (
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									height: '100%',
-									width: '100%',
-								}}
-							>
-								<CircularProgress color="primary" determinate={false} size="lg" value={25} variant="soft" />
-							</div>
-						))}
+					{(listLoading || listFetching) && (
+						<div
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								height: '100%',
+								width: '100%',
+							}}
+						>
+							<CircularProgress color="primary" determinate={false} size="lg" value={25} variant="soft" />
+						</div>
+					)}
 
 					{listError && (
 						<div
@@ -212,7 +211,7 @@ const NoteList = () => {
 						</div>
 					)}
 
-					{!listError && listSuccess && (
+					{listSuccess && (
 						<>
 							{notes.length === 0 ? (
 								<div
