@@ -16,10 +16,17 @@ import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
 export default function NoteContent() {
+	const initialNoteState = {
+		title: '',
+		content: '',
+		created_at: null,
+		updated_at: null,
+	}
+
 	const dispatch = useDispatch()
 	const selectedNote = useSelector((state) => state.notes.selected)
 	const [openSnackbar, setOpenSnackbar] = useState(false)
-	const [note, setNote] = useState({ title: '', content: '', created_at: '', updated_at: '' })
+	const [note, setNote] = useState({ ...initialNoteState })
 
 	const {
 		data: { item } = { item: {} },
@@ -51,7 +58,17 @@ export default function NoteContent() {
 	}
 
 	useEffect(() => {
-		if (selectedNote) document.querySelector('.ql-container .ql-editor').classList.add('scrollable')
+		return () => {
+			setNote(initialNoteState)
+		}
+	}, [])
+
+	useEffect(() => {
+		if (selectedNote) {
+			document.querySelector('.ql-container .ql-editor').classList.add('scrollable')
+		} else {
+			setNote(initialNoteState)
+		}
 	}, [selectedNote])
 
 	useEffect(() => {

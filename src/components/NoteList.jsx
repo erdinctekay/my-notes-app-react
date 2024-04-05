@@ -56,6 +56,12 @@ const NoteList = () => {
 	} = useListNotesQuery({ skip: (page - 1) * take, take })
 
 	useEffect(() => {
+		return () => {
+			dispatch(selectNote(null))
+		}
+	}, [])
+
+	useEffect(() => {
 		if (!!createError || !!listError) setOpenSnackbar(true)
 	}, [createError, listError])
 
