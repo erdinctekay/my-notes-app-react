@@ -178,17 +178,15 @@ export default function NoteContent() {
 								}}
 							/>
 							<Typography level="body-xs" textColor="text.tertiary">
-								{item.created_at && (
+								{note.created_at && (
 									<small>
-										last save:
+										<span>last save: </span>
 										<Typography textColor="text.primary">
-											{' '}
-											{note.updated_at ? moment(note.updated_at).format('DD/MM/YYYY HH:mm') : 'DD/MM/YYYY HH:mm'}
-										</Typography>{' '}
-										— created at:
+											{moment(note.updated_at).format('DD/MM/YYYY HH:mm')}
+										</Typography>
+										<span> — created at: </span>
 										<Typography textColor="text.primary">
-											{' '}
-											{note.created_at ? moment(note.created_at).format('DD/MM/YYYY HH:mm') : 'DD/MM/YYYY HH:mm'}
+											{moment(note.created_at).format('DD/MM/YYYY HH:mm')}
 										</Typography>
 									</small>
 								)}
